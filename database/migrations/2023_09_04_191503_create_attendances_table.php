@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('event_id');
+            $table->uuid('user_id');
+            $table->boolean('in_person')->default(false);
+            $table->boolean('requires_feeding')->default(false);
+            $table->boolean('requires_accommodation')->default(false);
+            $table->boolean('requires_transport')->default(false);
+            $table->json('services_required')->nullable();
+            $table->json('children')->nullable();
+            $table->json('dates_attending')->nullable();
+            $table->boolean('checked_in')->default(false);
             $table->timestamps();
         });
     }

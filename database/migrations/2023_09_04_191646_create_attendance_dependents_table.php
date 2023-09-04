@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('attendance_dependents', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('attendance_id');
+            $table->uuid('dependent_id');
+            $table->dateTime('assignedAt')->default(now());
             $table->timestamps();
         });
     }

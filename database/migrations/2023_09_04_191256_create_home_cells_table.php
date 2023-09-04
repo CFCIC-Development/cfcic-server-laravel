@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('home_cells', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();
+            $table->string('location');
             $table->timestamps();
         });
     }

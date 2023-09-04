@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('church_arm_profiles', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('church_arm_id');
+            $table->uuid('profile_id');
             $table->timestamps();
         });
     }

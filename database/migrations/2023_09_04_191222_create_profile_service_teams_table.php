@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('profile_service_teams', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('service_team_id');
+            $table->uuid('profile_id');
             $table->timestamps();
         });
     }

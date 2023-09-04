@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('event_services', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('event_id');
+            $table->string('name');
             $table->timestamps();
         });
     }

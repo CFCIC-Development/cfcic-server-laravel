@@ -12,7 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dependents', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->dateTime('birthday');
+            $table->string('allergies');
+            $table->string('emergency_contact');
+            $table->uuid('parent_profile_id')->nullable();
             $table->timestamps();
         });
     }
