@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ChurchArm extends Model
 {
     use HasFactory;
+
+    public function partners()
+    {
+        return $this->hasMany(ChurchArmProfile::class, 'church_arm_id');
+    }
 }

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Colony extends Model
 {
     use HasFactory;
+
+    public function members()
+    {
+        return $this->hasMany(Profile::class, 'colony_id');
+    }
 }

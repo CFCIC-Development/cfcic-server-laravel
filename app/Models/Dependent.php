@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Dependent extends Model
 {
     use HasFactory;
+
+    public function parentProfile()
+    {
+        return $this->belongsTo(Profile::class, 'parent_profile_id');
+    }
+
+    public function eventAttendances()
+    {
+        return $this->hasMany(AttendanceDependent::class, 'dependent_id');
+    }
 }

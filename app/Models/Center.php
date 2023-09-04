@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Center extends Model
 {
     use HasFactory;
+
+    public function members()
+    {
+        return $this->hasMany(Profile::class, 'church_centre_id');
+    }
 }

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class RolesAndResponsibilities extends Model
 {
     use HasFactory;
+
+    public function members()
+    {
+        return $this->hasMany(RolesAndResponsibilitiesProfile::class, 'role_responsibility_id');
+    }
 }

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class HomeCell extends Model
 {
     use HasFactory;
+
+    public function members()
+    {
+        return $this->hasMany(Profile::class, 'home_cell_id');
+    }
 }
