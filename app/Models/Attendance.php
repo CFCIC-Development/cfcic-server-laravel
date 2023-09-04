@@ -9,6 +9,16 @@ class Attendance extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'dates_attending'        => 'array',
+        'children'               => 'array',
+        'in_person'              => 'boolean',
+        'requires_feeding'       => 'boolean',
+        'requires_accommodation' => 'boolean',
+        'requires_transport'     => 'boolean',
+        'checked_in'             => 'boolean',
+    ];
+
     public function event()
     {
         return $this->belongsTo(Event::class, 'event_id');

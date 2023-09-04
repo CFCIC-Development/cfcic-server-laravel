@@ -18,11 +18,6 @@ class CreateUser extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $member = Member::find($data['member_id']);
-        $data['name'] = $member->fname . ' ' . $member->lname;
-        $data['email'] = $member->email;
-        $data['email_verified_at'] = now();
-
         return $data;
     }
 }

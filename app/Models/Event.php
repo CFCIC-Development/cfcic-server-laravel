@@ -11,6 +11,8 @@ class Event extends Model
     use HasFactory;
     use HasUuids;
 
+    protected $dates = ['start_date', 'end_date'];
+
     public function attendances()
     {
         return $this->hasMany(Attendance::class, 'event_id');
