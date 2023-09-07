@@ -72,8 +72,8 @@ class AttendanceResource extends Resource
                 Section::make([
                     Forms\Components\Repeater::make('children')
                         ->schema([
-                            Forms\Components\TextInput::make('fname')->required()->label('First name'),
-                            Forms\Components\TextInput::make('lname')->required()->label('Last name'),
+                            Forms\Components\TextInput::make('first_name')->required()->label('First name'),
+                            Forms\Components\TextInput::make('last_name')->required()->label('Last name'),
                             Forms\Components\TagsInput::make('allergies'),
                             Forms\Components\TextInput::make('emergency_contact')->numeric(),
                         ])

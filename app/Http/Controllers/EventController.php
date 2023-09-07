@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use App\Http\Resources\EventResource;
 use App\Models\Event;
 
 class EventController extends Controller
@@ -13,15 +14,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $events = Event::all();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return EventResource::collection($events);
     }
 
     /**
@@ -35,17 +30,10 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Event $event)
+    public function show($event)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Event $event)
-    {
-        //
+        $event = Event::findOrFail($event);
+        return new EventResource($event);
     }
 
     /**

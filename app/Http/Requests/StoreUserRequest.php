@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAttendanceRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,18 +22,17 @@ class StoreAttendanceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'event_id' => ['required'],
-            'user_id' => ['required'],
-            'in_person' => ['required'],
+            'name'      => 'required',
+            'email'     => 'required|email|unique:users,email',
+            'password' => 'required|string|confirmed|min:8',
         ];
     }
+
 
     public function messages(): array
     {
         return [
-            'event_id.required' => ['Please select an event'],
-            'user_id.required' => ['User ID is required'],
-            'in_person.required' => ['Please choose mode of attendance'],
+            'email.unique'     => 'This email is already registered',
         ];
     }
 }

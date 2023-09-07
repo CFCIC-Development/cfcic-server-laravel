@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('event_id');
             $table->uuid('user_id');
-            $table->boolean('in_person')->default(false);
-            $table->boolean('requires_feeding')->default(false);
-            $table->boolean('requires_accommodation')->default(false);
-            $table->boolean('requires_transport')->default(false);
+            $table->boolean('in_person')->default(false)->nullable();
+            $table->boolean('requires_feeding')->default(false)->nullable();
+            $table->boolean('requires_accommodation')->default(false)->nullable();
+            $table->boolean('requires_transport')->default(false)->nullable();
             $table->json('services_required')->nullable();
             $table->json('children')->nullable();
             $table->json('dates_attending')->nullable();
-            $table->boolean('checked_in')->default(false);
+            $table->boolean('checked_in')->default(false)->nullable();
             $table->timestamps();
         });
     }

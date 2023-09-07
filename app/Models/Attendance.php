@@ -12,6 +12,7 @@ class Attendance extends Model
     protected $casts = [
         'dates_attending'        => 'array',
         'children'               => 'array',
+        'services_required'      => 'array',
         'in_person'              => 'boolean',
         'requires_feeding'       => 'boolean',
         'requires_accommodation' => 'boolean',
