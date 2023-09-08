@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\DevotionalAuthor;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Devotional extends Model
 {
     use HasFactory;
-    
+
     public function author()
     {
-        return $this->belongsTo(Author::class);
+        return $this->belongsTo(DevotionalAuthor::class, 'devotional_author_id', 'id');
     }
 
     public function categories()

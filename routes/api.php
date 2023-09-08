@@ -17,11 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/api/v1/events.php';
 require __DIR__ . '/api/v1/attendance.php';
+require __DIR__ . '/api/v1/devotionals.php';
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/v1/user/{id}', [UsersController::class, 'show']);
     Route::get('/v1/profile', [UsersController::class, 'profile']);
-    Route::post('/v1/logout', [UsersController::class, 'logout']);
+    Route::post('/v1/auth/logout', [UsersController::class, 'logout']);
 });
 
 // user
