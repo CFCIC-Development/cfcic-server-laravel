@@ -175,38 +175,28 @@ class RolesAndPermissionsSeeder extends Seeder
             $viewownchurch,
         ]);
 
+        $registrationteam = Role::create(['name' => 'registration-team'])->syncPermissions([
+            $readrequisition,
+            $viewownfinances,
+            $viewownchurch,
+        ]);
+
         // CREATE ADMINS & USERS
         User::create([
-            'name'              => 'super admin',
-            'email'             => 'super@admin.com',
+            'name'              => 'Umaha Tokula',
+            'email'             => 'umahatokula@gmail.com',
             'email_verified_at' => now(),
-            'password'          => Hash::make('password'),
+            'password'          => Hash::make('Snow1507'),
             'remember_token'    => Str::random(10),
         ])->assignRole($superAdminRole);
 
         User::create([
-            'name' => 'Arome Tokula',
-            'email' => 'arome@christfamilyministries.org',
+            'name'              => 'Esther Eche',
+            'email'             => 'myesther97@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
-        ])->assignRole($generaloverseer);
-
-        User::create([
-            'name' => 'Nguavese Tokula',
-            'email' => 'avese@christfamilyministries.org',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
-        ])->assignRole($coordinatorchurches);
-
-        User::create([
-            'name' => 'Robert Nwalozie',
-            'email' => 'robert@christfamilyministries.org',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
-        ])->assignRole($residentpastor);
+            'password'          => Hash::make('12345678'),
+            'remember_token'    => Str::random(10),
+        ])->assignRole($registrationteam);
 
     }
 }

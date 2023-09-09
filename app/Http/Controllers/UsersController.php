@@ -29,7 +29,7 @@ class UsersController extends Controller
         $credentials = request(['email', 'password']);
         if (!auth()->attempt($credentials)) {
             return response()->json([
-                'message' => 'These credentials do not match our recordsxxx.',
+                'message' => 'These credentials do not match our records.',
                 'errors' => [
                     'password' => [
                         'Invalid credentials'
