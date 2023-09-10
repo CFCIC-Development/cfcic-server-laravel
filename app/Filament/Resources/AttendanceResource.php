@@ -97,10 +97,13 @@ class AttendanceResource extends Resource
                 Tables\Columns\IconColumn::make('in_person')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('requires_feeding')
+                    ->label('Feeding')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('requires_accommodation')
+                    ->label('Accommodation')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('requires_transport')
+                    ->label('Transport')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('checked_in')
                     ->boolean(),
@@ -131,6 +134,15 @@ class AttendanceResource extends Resource
             ])
             ->filtersFormColumns(1)
             ->actions([
+                Tables\Actions\Action::make('Confirm')
+                    ->label(fn (Attendance $record) =>  $record->checked_in == 0 ? 'Confirm' : 'Unconfirm')
+                    ->requiresConfirmation()
+                    ->icon('heroicon-o-check')
+                    ->color(fn (Attendance $record) =>  $record->checked_in == 0 ? 'success' : 'danger')
+                    ->action(function (Attendance $record) {
+                        $record->checked_in = $record->checked_in == 0 ? 1 : 0;
+                        $record->save();
+                    }),
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])

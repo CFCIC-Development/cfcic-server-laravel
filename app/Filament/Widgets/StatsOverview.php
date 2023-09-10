@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\Attendance;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -11,17 +12,18 @@ class StatsOverview extends BaseWidget
     {
 
         return [
-            Stat::make('Unique views', '192.1k')
-                ->description('32k increase')
-                ->descriptionIcon('heroicon-m-arrow-trending-up')
+            Stat::make('Faith Adventure 2023', Attendance::count())
+                ->description('Total registered')
                 ->color('success'),
-            Stat::make('Bounce rate', '21%')
-                ->description('7% increase')
-                ->descriptionIcon('heroicon-m-arrow-trending-down')
-                ->color('success'),
-            Stat::make('Average time on page', '3:12')
-                ->description('3% increase')
-                ->descriptionIcon('heroicon-m-arrow-trending-up'),
+            Stat::make('Require Feeding', Attendance::where('requires_feeding', 1)->count())
+                ->description('Total')
+                ->color('warning'),
+            Stat::make('Require Accommodation', Attendance::where('requires_accommodation', 1)->count())
+                ->color('warning')
+                ->description('Total'),
+            Stat::make('Require Transport', Attendance::where('requires_transport', 1)->count())
+                ->color('warning')
+                ->description('Total')
         ];
     }
 }
