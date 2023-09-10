@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Livewire\Livewire;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,5 +23,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::unguard();
+
+        Livewire::setScriptRoute(function ($handle) {
+            return Route::get('/livewire/livewire.js', $handle);
+        });
     }
 }
