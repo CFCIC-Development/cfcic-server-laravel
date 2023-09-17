@@ -25,7 +25,12 @@ class AppServiceProvider extends ServiceProvider
         Model::unguard();
 
         Livewire::setScriptRoute(function ($handle) {
-            return Route::get('/livewire/livewire.js', $handle);
+            return Route::get('/public/livewire/livewire.js', $handle);
+        });
+
+        Livewire::setUpdateRoute(function ($handle) {
+            return Route::post('/public/livewire/update', $handle)
+                ->middleware(['web']);
         });
     }
 }

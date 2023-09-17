@@ -23,6 +23,7 @@ return new class extends Migration
             $table->json('children')->nullable();
             $table->json('dates_attending')->nullable();
             $table->boolean('checked_in')->default(false)->nullable();
+            $table->string('registration_date')->nullable();
             $table->timestamps();
         });
     }

@@ -20,6 +20,8 @@ class Attendance extends Model
         'checked_in'             => 'boolean',
     ];
 
+    protected $dates = ['registration_date'];
+
     public function event()
     {
         return $this->belongsTo(Event::class, 'event_id');

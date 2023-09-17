@@ -23,6 +23,7 @@ Route::get('/', function () {
 });
 
 Route::get('/import', function () {
+    
     $data =  [
         [
             "id" => 16,
@@ -8134,6 +8135,7 @@ Route::get('/import', function () {
                     'services_required'      => data_get($attributes, 'services_required'),
                     'dates_attending'        => data_get($attributes, 'dates_attending'),
                     'children'               => data_get($attributes, 'children'),
+                    'registration_date'      => explode('T', data_get($attributes, 'createdAt'))[0],
                 ]);
             });
         }

@@ -23,6 +23,9 @@ class StatsOverview extends BaseWidget
                 ->description('Total'),
             Stat::make('Require Transport', Attendance::where('requires_transport', 1)->count())
                 ->color('warning')
+                ->description('Total'),
+            Stat::make('Confirmed/Onsite Attendance', Attendance::where('checked_in', 1)->count() . '/' . Attendance::where('in_person', 1)->count())
+                ->color('warning')
                 ->description('Total')
         ];
     }

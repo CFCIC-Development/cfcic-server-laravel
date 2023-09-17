@@ -45,6 +45,8 @@ class AttendanceResource extends Resource
                         ->live(),
                     Forms\Components\Select::make('user_id')
                         ->label('User')
+                        ->searchable()
+                        ->preload()
                         ->relationship(name: 'user', titleAttribute: 'name')
                         ->createOptionForm([
                             Forms\Components\TextInput::make('name')
@@ -107,14 +109,9 @@ class AttendanceResource extends Resource
                     ->boolean(),
                 Tables\Columns\IconColumn::make('checked_in')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('created_at')
+                Tables\Columns\TextColumn::make('registration_date')
                     ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable(),
             ])
             ->filters([
 
