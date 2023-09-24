@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('tagline');
-            $table->string('banner_image');
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
+            $table->string('name')->nullable();
+            $table->string('tagline')->nullable();
+            $table->string('banner_image')->nullable();
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
             $table->timestamps();
         });
     }
