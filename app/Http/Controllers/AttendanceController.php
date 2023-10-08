@@ -55,6 +55,8 @@ class AttendanceController extends Controller
 
         $created = $repository->create($payload);
 
+        return response()->json($created);
+
         return new AttendanceResource($created);
     }
 

@@ -21,13 +21,13 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            // CenterSeeder::class,
-            // CountrySeeder::class,
-            // StateSeeder::class,
-            // LocalSeeder::class,
-            // RolesAndPermissionsSeeder::class,
-            // UsersSeeder::class,
-            // EventsSeeder::class,
+            CenterSeeder::class,
+            CountrySeeder::class,
+            StateSeeder::class,
+            LocalSeeder::class,
+            RolesAndPermissionsSeeder::class,
+            UsersSeeder::class,
+            EventsSeeder::class,
             AttendanceSeeder::class,
         ]);
     }

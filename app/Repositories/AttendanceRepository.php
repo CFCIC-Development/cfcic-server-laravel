@@ -2,15 +2,30 @@
 
 namespace App\Repositories;
 
-use App\Exceptions\GeneralJsonException;
 use App\Models\Attendance;
 use Illuminate\Support\Facades\DB;
+use App\Exceptions\GeneralJsonException;
+use App\Http\Resources\AttendanceResource;
 
 class AttendanceRepository extends BaseRepository
 {
 
     public function create(array $attributes)
     {
+        $eventId = data_get($attributes, 'event_id', 'Untitled');
+        $userId  = data_get($attributes, 'user_id');
+        $attendance = Attendance::where([
+            'event_id' => $eventId,
+            'user_id' => $userId,
+        ])->first();
+        if ($attendance) {
+            return [
+                'status' => false,
+                'message' => 'Already registered',
+                'data' => new AttendanceResource($attendance)
+            ];
+        }
+
         return DB::transaction(function () use ($attributes) {
 
             $existingDependents = data_get($attributes, 'existing_dependents') ?? [];
@@ -41,7 +56,11 @@ class AttendanceRepository extends BaseRepository
             throw_if(!$created, GeneralJsonException::class, 'Failed to create. ');
             // event(new AttendanceCreated($created));
 
-            return $created;
+            return [
+                'status' => true,
+                'message' => 'Successful',
+                'data' => new AttendanceResource($created)
+            ];
         });
     }
 
