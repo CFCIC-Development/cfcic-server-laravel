@@ -14,7 +14,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
+        $events = Event::whereDate('end_date', '>', now())->get();
 
         return EventResource::collection($events);
     }

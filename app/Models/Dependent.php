@@ -11,6 +11,10 @@ class Dependent extends Model
     use HasFactory;
     use HasUuids;
 
+    protected $casts = [
+        'dates_attending'        => 'array',
+    ];
+
     public function parentProfile()
     {
         return $this->belongsTo(Profile::class, 'parent_profile_id');

@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UsersSeeder extends Seeder
@@ -5378,14 +5381,39 @@ class UsersSeeder extends Seeder
         ];
 
         User::truncate();
+        $userRole = Role::findByName('user');
+        $superAdminRole = Role::findByName('super-admin');
+        $registrationteam = Role::findByName('registration-team');
         foreach ($users as $user) {
-            $user = User::updateOrCreate(
-                ['email' =>  $user['email']],
-                [
-                    'name' => $user['name'],
-                    'password' => $user['password'],
-                ]
-            );
+
+            if ($user['email'] == 'umahatokula@gmail.com') {
+
+                User::create([
+                    'name'              => 'Umaha Tokula',
+                    'email'             => 'umahatokula@gmail.com',
+                    'email_verified_at' => now(),
+                    'password'          => Hash::make('Snow1507'),
+                    'remember_token'    => Str::random(10),
+                ])->assignRole($superAdminRole);
+            } else if ($user['email'] == 'myesther97@gmail.com') {
+
+                User::create([
+                    'name'              => 'Esther Eche',
+                    'email'             => 'myesther97@gmail.com',
+                    'email_verified_at' => now(),
+                    'password'          => Hash::make('12345678'),
+                    'remember_token'    => Str::random(10),
+                ])->assignRole($registrationteam);
+            } else {
+
+                User::firstOrCreate(
+                    ['email' =>  $user['email']],
+                    [
+                        'name' => $user['name'],
+                        'password' => $user['password'],
+                    ]
+                )->assignRole($userRole);
+            }
         }
     }
 }

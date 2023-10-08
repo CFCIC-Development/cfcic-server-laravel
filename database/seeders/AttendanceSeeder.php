@@ -860,16 +860,17 @@ class AttendanceSeeder extends Seeder
 
                     // dd($resultUsers[trim($values[2], "'")]);
                     $userEmail = $resultUsers[trim($values[2], "'")];
+                    echo($userEmail. '<br>');
                     $user = User::where('email', $userEmail)->first();
-                    // dd($user);
                     if (!$user) {
-                        $user = User::updateOrCreate(
-                            ['email' =>  $userEmail],
-                            [
-                                'password' => '12345678',
-                            ]
-                        );
+                        echo 'creating user...';
+                        $user = User::create([
+                            'email' =>  $userEmail,
+                            'password' => '12345678',
+                        ]);
+                        echo($user);
                     }
+                    // dd($user);
 
                     // Create an associative array with keys and values
                     $record = [
@@ -881,9 +882,9 @@ class AttendanceSeeder extends Seeder
                         'requires_accommodation' => $values[5],
                         'requires_transport' => $values[6],
                         'services_required' => $values[7],
-                        'children' => $values[8],
-                        'dates_attending' => $values[9],
-                        'checked_in' => $values[10],
+                        'children' => '[]',
+                        'dates_attending' => '[]',
+                        'checked_in' => strlen($values[10]) > 1 ? 1 : $values[10],
                         'registration_date' => trim($values[11], "'"), // Remove single quotes
                         // 'column12' => trim($values[12], "'"), // Remove single quotes
                         // 'column13' => trim($values[13], "'"), // Remove single quotes

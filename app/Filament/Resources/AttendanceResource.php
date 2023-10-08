@@ -2,23 +2,24 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\AttendanceResource\Pages;
-use App\Filament\Resources\AttendanceResource\RelationManagers;
-use App\Models\Attendance;
-use App\Models\Event;
 use Carbon\Carbon;
 use Filament\Forms;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Form;
-use Filament\Forms\Set;
-use Filament\Resources\Resource;
+use App\Models\User;
 use Filament\Tables;
-use Filament\Tables\Enums\FiltersLayout;
-use Filament\Tables\Filters\Filter;
-use Filament\Tables\Filters\SelectFilter;
+use App\Models\Event;
+use Filament\Forms\Set;
+use Filament\Forms\Form;
+use App\Models\Attendance;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Tables\Filters\Filter;
+use Filament\Forms\Components\Section;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\AttendanceResource\Pages;
+use App\Filament\Resources\AttendanceResource\RelationManagers;
 
 class AttendanceResource extends Resource
 {
@@ -33,7 +34,8 @@ class AttendanceResource extends Resource
                 Section::make([
                     Forms\Components\Select::make('event_id')
                         ->label("Event")
-                        ->options(Event::all()->pluck('name', 'id'))
+                        // ->options(Event::all()->pluck('name', 'id'))
+                        ->relationship(name: 'event', titleAttribute: 'name')
                         ->native(false)
                         ->searchable()
                         ->preload()
@@ -47,7 +49,8 @@ class AttendanceResource extends Resource
                         ->label('User')
                         ->searchable()
                         ->preload()
-                        ->relationship(name: 'user', titleAttribute: 'name')
+                        ->options(User::whereNotNull('name')->pluck('name', 'id'))
+                        // ->relationship(name: 'user', titleAttribute: 'name')
                         ->createOptionForm([
                             Forms\Components\TextInput::make('name')
                                 ->required(),
@@ -65,10 +68,10 @@ class AttendanceResource extends Resource
                     Forms\Components\Toggle::make('requires_transport'),
                     // Forms\Components\Textarea::make('services_required')
                     //     ->columnSpanFull(),
-                    Forms\Components\Select::make('dates_attending')
-                        ->multiple()
-                        ->preload()
-                        ->columnSpanFull(),
+                    // Forms\Components\Select::make('dates_attending')
+                    //     ->multiple()
+                    //     ->preload()
+                    //     ->columnSpanFull(),
                 ])
                     ->columns(2),
                 Section::make([
@@ -77,7 +80,7 @@ class AttendanceResource extends Resource
                             Forms\Components\TextInput::make('first_name')->required()->label('First name'),
                             Forms\Components\TextInput::make('last_name')->required()->label('Last name'),
                             Forms\Components\TagsInput::make('allergies'),
-                            Forms\Components\TextInput::make('emergency_contact')->numeric(),
+                            Forms\Components\TextInput::make('emergency_contact')->string(),
                         ])
                         ->defaultItems(0)
                         ->columnSpanFull()

@@ -182,21 +182,21 @@ class RolesAndPermissionsSeeder extends Seeder
         ]);
 
         // CREATE ADMINS & USERS
-        User::create([
-            'name'              => 'Umaha Tokula',
-            'email'             => 'umahatokula@gmail.com',
-            'email_verified_at' => now(),
-            'password'          => Hash::make('Snow1507'),
-            'remember_token'    => Str::random(10),
-        ])->assignRole($superAdminRole);
+        // User::create([
+        //     'name'              => 'Umaha Tokula',
+        //     'email'             => 'umahatokula@gmail.com',
+        //     'email_verified_at' => now(),
+        //     'password'          => Hash::make('Snow1507'),
+        //     'remember_token'    => Str::random(10),
+        // ])->assignRole($superAdminRole);
 
-        User::create([
-            'name'              => 'Esther Eche',
-            'email'             => 'myesther97@gmail.com',
-            'email_verified_at' => now(),
-            'password'          => Hash::make('12345678'),
-            'remember_token'    => Str::random(10),
-        ])->assignRole($registrationteam);
+        // User::create([
+        //     'name'              => 'Esther Eche',
+        //     'email'             => 'myesther97@gmail.com',
+        //     'email_verified_at' => now(),
+        //     'password'          => Hash::make('12345678'),
+        //     'remember_token'    => Str::random(10),
+        // ])->assignRole($registrationteam);
 
     }
 }

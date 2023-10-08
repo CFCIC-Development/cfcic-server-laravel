@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('event_id');
+            $table->uuid('event_id');
             $table->uuid('user_id');
             $table->boolean('in_person')->default(false)->nullable();
             $table->boolean('requires_feeding')->default(false)->nullable();

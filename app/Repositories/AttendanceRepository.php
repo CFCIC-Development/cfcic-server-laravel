@@ -23,6 +23,7 @@ class AttendanceRepository extends BaseRepository
                 $dependent['allergies'] = explode(',', $dependent['allergies']);
                 $processedDependentsArray[] = $dependent;
             }
+            // return $processedDependentsArray;
 
             $created = Attendance::query()->create([
                 'event_id'               => data_get($attributes, 'event_id', 'Untitled'),
@@ -34,6 +35,7 @@ class AttendanceRepository extends BaseRepository
                 'services_required'      => data_get($attributes, 'services_required'),
                 'dates_attending'        => data_get($attributes, 'dates_attending'),
                 'children'               => $processedDependentsArray,
+                'registration_date'      => now(),
             ]);
 
             throw_if(!$created, GeneralJsonException::class, 'Failed to create. ');
@@ -50,7 +52,7 @@ class AttendanceRepository extends BaseRepository
      */
     public function update($post, array $attributes)
     {
-        return DB::transaction(function () use($post, $attributes) {
+        return DB::transaction(function () use ($post, $attributes) {
             $updated = $post->update([
                 'name' => data_get($attributes, 'name', 'Untitled'),
                 'description' => data_get($attributes, 'description'),
@@ -62,14 +64,13 @@ class AttendanceRepository extends BaseRepository
 
             throw_if(!$updated, GeneralJsonException::class, 'Failed to update post');
 
-//            event(new AttendanceUpdated($post));
+            //            event(new AttendanceUpdated($post));
 
-            if($userIds = data_get($attributes, 'user_ids')){
+            if ($userIds = data_get($attributes, 'user_ids')) {
                 $post->users()->sync($userIds);
             }
 
             return $post;
-
         });
     }
 
@@ -79,7 +80,7 @@ class AttendanceRepository extends BaseRepository
      */
     public function forceDelete($post)
     {
-        return DB::transaction(function () use($post) {
+        return DB::transaction(function () use ($post) {
             $deleted = $post->forceDelete();
 
             throw_if(!$deleted, GeneralJsonException::class, "cannot delete post.");
@@ -88,6 +89,5 @@ class AttendanceRepository extends BaseRepository
 
             return $deleted;
         });
-
     }
 }
