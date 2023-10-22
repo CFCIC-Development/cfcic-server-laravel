@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\NewPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 // user
 Route::post('/v1/auth/register', [UsersController::class, 'signup']);
 Route::post('/v1/auth/login', [UsersController::class, 'login']);
+
+Route::post('/v1/auth/forgot-password', [NewPasswordController::class, 'forgotPassword']);
+Route::post('/v1/auth/reset-password', [NewPasswordController::class, 'reset']);

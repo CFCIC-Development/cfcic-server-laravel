@@ -60,7 +60,7 @@ class AttendanceRepository extends BaseRepository
                 'status' => true,
                 'message' => 'Successful',
                 'data' => new AttendanceResource($created)
-            ];
+            ];  
         });
     }
 
