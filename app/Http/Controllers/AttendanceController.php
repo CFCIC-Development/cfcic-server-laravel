@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
+use App\Mail\AttendeeRegistered;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Resources\AttendanceResource;
+use App\Repositories\AttendanceRepository;
 use App\Http\Requests\StoreAttendanceRequest;
 use App\Http\Requests\UpdateAttendanceRequest;
-use App\Http\Resources\AttendanceResource;
-use App\Models\Attendance;
-use App\Repositories\AttendanceRepository;
 
 class AttendanceController extends Controller
 {
@@ -53,11 +55,11 @@ class AttendanceController extends Controller
             'new_dependents',
         ]);
 
-        $created = $repository->create($payload);
+        $attendance = $repository->create($payload);
 
-        return response()->json($created);
+        return response()->json($attendance);
 
-        return new AttendanceResource($created);
+        return new AttendanceResource($attendance);
     }
 
     /**

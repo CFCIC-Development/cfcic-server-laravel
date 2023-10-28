@@ -2,10 +2,14 @@
 
 namespace App\Repositories;
 
+use App\Models\User;
 use App\Models\Attendance;
+use App\Mail\AttendeeRegistered;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use App\Exceptions\GeneralJsonException;
 use App\Http\Resources\AttendanceResource;
+use App\Models\Event;
 
 class AttendanceRepository extends BaseRepository
 {
@@ -56,11 +60,18 @@ class AttendanceRepository extends BaseRepository
             throw_if(!$created, GeneralJsonException::class, 'Failed to create. ');
             // event(new AttendanceCreated($created));
 
+            $event = Event::find(data_get($attributes, 'event_id'));
+            $user = User::find(data_get($attributes, 'user_id'));
+
+            if ($created) {
+                Mail::to($user)->send(new AttendeeRegistered($created, $event));
+            }
+
             return [
                 'status' => true,
                 'message' => 'Successful',
                 'data' => new AttendanceResource($created)
-            ];  
+            ];
         });
     }
 

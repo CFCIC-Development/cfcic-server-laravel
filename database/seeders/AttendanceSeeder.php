@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\Attendance;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class AttendanceSeeder extends Seeder
@@ -866,7 +867,7 @@ class AttendanceSeeder extends Seeder
                         echo 'creating user...';
                         $user = User::create([
                             'email' =>  $userEmail,
-                            'password' => '12345678',
+                            'password' => Hash::make('12345678'),
                         ]);
                         echo($user);
                     }

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name')->nullable();
+            $table->string('code')->nullable();
             $table->string('tagline')->nullable();
             $table->string('banner_image')->nullable();
             $table->dateTime('start_date')->nullable();

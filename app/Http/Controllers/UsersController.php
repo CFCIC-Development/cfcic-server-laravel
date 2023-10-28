@@ -29,7 +29,8 @@ class UsersController extends Controller
         $credentials = request(['email', 'password']);
         if (!auth()->attempt($credentials)) {
             return response()->json([
-                'message' => 'These credentials do not match our records.',
+                // 'message' => 'These credentials do not match our records.',
+                'message' => 'We don\'t have a record of this email address',
                 'errors' => [
                     'password' => [
                         'Invalid credentials'
@@ -61,7 +62,8 @@ class UsersController extends Controller
 
         $user               = new User;
         $user->email 		= $request->email;
-    	$user->password     = Hash::make($request->password);
+    	// $user->password     = Hash::make($request->password);
+        $user->password     = Hash::make('12345678');
     	$user->name   		= $request->name;
     	$user->save();
 

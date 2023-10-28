@@ -5392,7 +5392,7 @@ class UsersSeeder extends Seeder
                     'name'              => 'Umaha Tokula',
                     'email'             => 'umahatokula@gmail.com',
                     'email_verified_at' => now(),
-                    'password'          => Hash::make('Snow1507'),
+                    'password'          => Hash::make('12345678'),
                     'remember_token'    => Str::random(10),
                 ])->assignRole($superAdminRole);
             } else if ($user['email'] == 'myesther97@gmail.com') {
@@ -5410,7 +5410,7 @@ class UsersSeeder extends Seeder
                     ['email' =>  $user['email']],
                     [
                         'name' => $user['name'],
-                        'password' => $user['password'],
+                        'password' => Hash::make('12345678'),
                     ]
                 )->assignRole($userRole);
             }
