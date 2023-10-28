@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 
 Route::get('/email', function () {
-    $attendee = Attendance::first();
+    $attendance = Attendance::first();
     $event = Event::first();
-    return view('emails.events.registered', compact('attendee', 'event'));
+    return view('emails.events.registered', compact('attendance', 'event'));
 });

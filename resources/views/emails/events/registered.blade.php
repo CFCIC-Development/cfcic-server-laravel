@@ -71,22 +71,22 @@
         <div class="bg-blue-500 text-white text-center py-4 mb-4">
             <h1 class="text-2xl">{{$event->name}}</h1>
         </div>
-        <p>Hello {{$attendee->user->name}}.</p> <br>
+        <p>Hello {{$attendance->user->name}}.</p> <br>
         <p>And thank you for taking the time to register for {{$event->name}}. Your registration was successful and we are elated. It's going to be the best time of our lives yet and we are really excited at the transformation that you'll experience.</p> <br>
 
         <p>If you\’ll be attending onsite, upon arrival, you will be required to confirm your registration and receive your Welcome Package at the registration stand, kindly stop by!</p> <br>
 
         <p>Kindly find details of your registration below:</p> <br>
 
-        Phone: {{$attendee->user->phone}} <br /> <br>
+        Phone: {{$attendance->user->phone}} <br /> <br>
 
-        Email: {{$attendee->user->email}} <br /> <br>
+        Email: {{$attendance->user->email}} <br /> <br>
 
-        Accommodation: {{$attendee->requires_accommodation ? 'Yes' : 'No'}} <br /> <br>
+        Accommodation: {{$attendance->requires_accommodation ? 'Yes' : 'No'}} <br /> <br>
 
-        Feeding: {{$attendee->requires_feeding ? 'Yes' : 'No'}}<br /> <br>
+        Feeding: {{$attendance->requires_feeding ? 'Yes' : 'No'}}<br /> <br>
 
-        Transportation: {{$attendee->requires_transport ? 'Yes' : 'No'}}<br /> <br>
+        Transportation: {{$attendance->requires_transport ? 'Yes' : 'No'}}<br /> <br>
 
         <p>Kindly keep an eye out for our emails on further notifications and instructions. To avoid our mail going into your spam or promotions, do well to add our email to your contact list. You can also join the Telegram Channel (t.me/cfcic) for quick notifications and messages.</p> <br>
 
