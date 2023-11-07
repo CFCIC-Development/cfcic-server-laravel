@@ -18,6 +18,7 @@ class Attendance extends Model
         'requires_accommodation' => 'boolean',
         'requires_transport'     => 'boolean',
         'checked_in'             => 'boolean',
+        'checked_in'             => 'boolean',
     ];
 
     protected $dates = ['registration_date'];

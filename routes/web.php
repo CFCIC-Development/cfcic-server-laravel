@@ -1,11 +1,13 @@
 <?php
 
-use App\Models\Attendance;
-use App\Models\Event;
 use App\Models\User;
-use App\Repositories\AttendanceRepository;
+use App\Models\Event;
+use App\Models\Attendance;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
+use App\Exports\AttendanceChildrenExport;
+use App\Repositories\AttendanceRepository;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +29,9 @@ Route::get('/email', function () {
     $attendance = Attendance::first();
     $event = Event::first();
     return view('emails.events.registered', compact('attendance', 'event'));
+});
+
+Route::get('/export/children', function () {
+    $event = Event::first();
+    return Excel::download(new AttendanceChildrenExport($event), 'childrenAttendance.xlsx');
 });

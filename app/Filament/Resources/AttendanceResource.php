@@ -12,11 +12,16 @@ use Filament\Forms\Form;
 use App\Models\Attendance;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use App\Exports\AttendanceExport;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\Filter;
+use Maatwebsite\Excel\Facades\Excel;
 use Filament\Forms\Components\Section;
+use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\AttendanceResource\Pages;
 use App\Filament\Resources\AttendanceResource\RelationManagers;
@@ -150,6 +155,9 @@ class AttendanceResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+                BulkAction::make('Export')
+                    ->requiresConfirmation()
+                    ->action(fn (Collection $records) => Excel::download(new AttendanceExport($records), 'attendance.xlsx'))
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
