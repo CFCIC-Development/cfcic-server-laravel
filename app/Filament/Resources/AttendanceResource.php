@@ -54,13 +54,14 @@ class AttendanceResource extends Resource
                         ->label('User')
                         ->searchable()
                         ->preload()
-                        ->options(User::whereNotNull('name')->pluck('name', 'id'))
-                        // ->relationship(name: 'user', titleAttribute: 'name')
+                        // ->options(User::whereNotNull('name')->pluck('name', 'id'))
+                        ->relationship(name: 'user', titleAttribute: 'name')
                         ->createOptionForm([
                             Forms\Components\TextInput::make('name')
                                 ->required(),
                             Forms\Components\TextInput::make('email')
                                 ->email()
+                                ->unique()
                                 ->required(),
                             Forms\Components\TextInput::make('password')
                                 ->password()

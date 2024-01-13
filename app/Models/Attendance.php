@@ -30,7 +30,7 @@ class Attendance extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class)->withDefault([
+        return $this->belongsTo(User::class)->whereNotNull('name')->withDefault([
             'name' => 'No name',
         ]);
     }
